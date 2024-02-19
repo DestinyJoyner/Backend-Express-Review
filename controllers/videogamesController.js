@@ -2,6 +2,8 @@ const express = require("express")
 
 const videogames = express.Router()
 
+const {checkName} = require("../middleware/nameValidation.js")
+
 // http://localhost:3001/videogame/
 videogames.get("/", (req,res) => {
     res.status(200).json({message:"Videogame Home Page"})
@@ -11,7 +13,7 @@ videogames.get("/", (req,res) => {
 videogames.get("/:videogameID", (req, res) => {
     const videogameID = req.params.videogameID
 
-    console.log(Number(videogameID))
+    // console.log(Number(videogameID))
     if(Number(videogameID)){
         res.status(200).json({message: videogameID})
     }
@@ -19,10 +21,20 @@ videogames.get("/:videogameID", (req, res) => {
         res.status(404).json({
             error : "id must be numeric value"
         })
-    }
-
-    
+    }  
 })
+
+
+videogames.post("/", checkName, (req, res) => {
+    const body = req.body
+    // console.log(body)
+    res.status(200).json({message: body })
+})
+
+
+
+
+
 
 
 
