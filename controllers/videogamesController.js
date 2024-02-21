@@ -33,6 +33,40 @@ videogames.post("/", checkName, (req, res) => {
 
 
 
+videogames.put("/:videogameID", checkName,  (req,res) => {
+    const videogameID = req.params.videogameID
+
+    const body = req.body
+
+    res.status(200).json({
+        body: body, 
+        videogameID: videogameID})
+    
+        // res.status(200).json({body, videogameID})
+
+    // res.status(200).json({
+    //     value: "Hi",
+    //     order: "hamburger"
+    // })
+
+})
+
+
+videogames.delete("/:videogameID", (req, res) => {
+    const videogameID = req.params.videogameID
+
+    if(Number(videogameID)){
+        res.status(200).json({message: ` delete ${videogameID}`})
+    }
+    else {
+        res.status(404).json({
+            error : "videogame id must be numeric value"
+        })
+    }  
+})
+
+
+
 
 
 
