@@ -4,7 +4,7 @@ const videogames = express.Router()
 
 const {checkName} = require("../middleware/nameValidation.js")
 
-const {getAllVideogames} = require("../query/videogame.js")
+const { getAllVideogames, getOneVideogame} = require("../query/videogame.js")
 
 // http://localhost:3001/videogame/
 videogames.get("/", async (req,res) => {
@@ -13,12 +13,14 @@ videogames.get("/", async (req,res) => {
 })
 
 
-videogames.get("/:videogameID", (req, res) => {
+videogames.get("/:videogameID", async (req, res) => {
     const videogameID = req.params.videogameID
 
-    // console.log(Number(videogameID))
     if(Number(videogameID)){
-        res.status(200).json({message: videogameID})
+        // call get one function with param id value
+        const oneVideogame = await getOneVideogame(videogameID)
+
+        res.status(200).json(oneVideogame)
     }
     else {
         res.status(404).json({
