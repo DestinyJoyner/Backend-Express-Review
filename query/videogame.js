@@ -24,7 +24,36 @@ const getOneVideogame = async (idValue) => {
     }
 }
 
+
+const updateVideogame = async (idValue, valueObj) => {
+    /* 
+    {
+    id 
+    title 
+    release_year 
+    favorite 
+    game_system 
+    }
+    */
+    try {
+        const updatedVideogame = await db.one('UPDATE videogames SET title=$1, release_year=$2, favorite=$3, game_system=$4 WHERE id=$5 RETURNING *', [
+            valueObj.title,
+            valueObj.release_year,
+            valueObj.favorite,
+            valueObj.game_system,
+            idValue
+        ])
+
+        return updatedVideogame
+
+        
+    } catch (error) {
+        return error
+    }
+}
+
 module.exports = {
     getAllVideogames,
-    getOneVideogame
+    getOneVideogame,
+    updateVideogame
 }
