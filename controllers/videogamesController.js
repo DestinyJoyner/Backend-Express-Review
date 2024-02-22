@@ -4,9 +4,12 @@ const videogames = express.Router()
 
 const {checkName} = require("../middleware/nameValidation.js")
 
+const {getAllVideogames} = require("../query/videogame.js")
+
 // http://localhost:3001/videogame/
-videogames.get("/", (req,res) => {
-    res.status(200).json({message:"Videogame Home Page"})
+videogames.get("/", async (req,res) => {
+    const allVideogames = await getAllVideogames()
+    res.status(200).json(allVideogames)
 })
 
 
