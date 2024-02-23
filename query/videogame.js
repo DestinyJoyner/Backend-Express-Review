@@ -62,9 +62,27 @@ const deleteVideogame = async (idValue) => {
     }
 }
 
+
+const createVideogame = async (valueObj) => {
+    try {
+        const newVideogame = await db.one('INSERT INTO videogames (title, release_year, favorite, game_system) VALUES ($1, $2, $3, $4) RETURNING *', [
+            valueObj.title,
+            valueObj.release_year,
+            valueObj.favorite,
+            valueObj.game_system
+        ])
+        
+        return newVideogame
+
+    } catch (error) {
+        return error
+    }
+}
+
 module.exports = {
     getAllVideogames,
     getOneVideogame,
     updateVideogame,
-    deleteVideogame
+    deleteVideogame,
+    createVideogame
 }
