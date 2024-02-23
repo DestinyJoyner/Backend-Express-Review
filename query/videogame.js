@@ -52,8 +52,19 @@ const updateVideogame = async (idValue, valueObj) => {
     }
 }
 
+const deleteVideogame = async (idValue) => {
+    try {
+        const deletedVideogame = await db.one('DELETE FROM videogames WHERE id=$1 RETURNING *', idValue)
+        
+        return deletedVideogame
+    } catch (error) {
+        return error
+    }
+}
+
 module.exports = {
     getAllVideogames,
     getOneVideogame,
-    updateVideogame
+    updateVideogame,
+    deleteVideogame
 }
