@@ -9,5 +9,6 @@ CREATE TABLE videogames (
     title TEXT NOT NULL,
     release_year INT,
     favorite BOOLEAN,
-    game_system TEXT
+    game_system TEXT,
+    game_image TEXT
 );

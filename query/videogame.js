@@ -33,13 +33,15 @@ const updateVideogame = async (idValue, valueObj) => {
     release_year 
     favorite 
     game_system 
+    game_image
     }
     */
     try {
-        const updatedVideogame = await db.one('UPDATE videogames SET title=$1, release_year=$2, favorite=$3, game_system=$4 WHERE id=$5 RETURNING *', [
+        const updatedVideogame = await db.one('UPDATE videogames SET title=$1, release_year=$2, favorite=$3, game_system=$4, game_image=$5 WHERE id=$6 RETURNING *', [
             valueObj.title,
             valueObj.release_year,
             valueObj.favorite,
+            valueObj.game_system,
             valueObj.game_system,
             idValue
         ])
@@ -65,11 +67,12 @@ const deleteVideogame = async (idValue) => {
 
 const createVideogame = async (valueObj) => {
     try {
-        const newVideogame = await db.one('INSERT INTO videogames (title, release_year, favorite, game_system) VALUES ($1, $2, $3, $4) RETURNING *', [
+        const newVideogame = await db.one('INSERT INTO videogames (title, release_year, favorite, game_system, game_image) VALUES ($1, $2, $3, $4, $5) RETURNING *', [
             valueObj.title,
             valueObj.release_year,
             valueObj.favorite,
-            valueObj.game_system
+            valueObj.game_system,
+            valueObj.game_image
         ])
         
         return newVideogame
