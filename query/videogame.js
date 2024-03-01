@@ -42,7 +42,7 @@ const updateVideogame = async (idValue, valueObj) => {
             valueObj.release_year,
             valueObj.favorite,
             valueObj.game_system,
-            valueObj.game_system,
+            valueObj.game_image,
             idValue
         ])
 
